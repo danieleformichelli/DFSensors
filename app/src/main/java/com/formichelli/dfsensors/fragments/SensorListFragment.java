@@ -11,13 +11,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.formichelli.dfsensors.R;
+import com.formichelli.dfsensors.Utils;
 
-public class GenericSensorFragment extends Fragment {
+import java.util.List;
+
+public class SensorListFragment extends Fragment {
     private static final String TYPE = "type";
 
     private int type;
 
-    public GenericSensorFragment() {
+    public SensorListFragment() {
         // Required empty public constructor
     }
 
@@ -26,10 +29,10 @@ public class GenericSensorFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param type The type of the sensors to be displayed
-     * @return A new instance of fragment GenericSensorFragment.
+     * @return A new instance of fragment SensorListFragment.
      */
-    public static GenericSensorFragment newInstance(int type) {
-        GenericSensorFragment fragment = new GenericSensorFragment();
+    public static SensorListFragment newInstance(int type) {
+        SensorListFragment fragment = new SensorListFragment();
         Bundle args = new Bundle();
         args.putInt(TYPE, type);
         fragment.setArguments(args);
@@ -48,13 +51,20 @@ public class GenericSensorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View mainLayout = inflater.inflate(R.layout.fragment_generic_sensor, container, false);
-        final TextView sensorsList = (TextView) mainLayout.findViewById(R.id.sensors_list);
+        View mainView = inflater.inflate(R.layout.fragment_generic_sensor, container, false);
+
+        final TextView sensorsList = (TextView) mainView.findViewById(R.id.sensors_list);
 
         final boolean shouldPrintType = type == Sensor.TYPE_ALL;
         final SensorManager sensorManager = (SensorManager) getContext().getSystemService(Context.SENSOR_SERVICE);
-        final StringBuilder sensorListBuilder = new StringBuilder("\nAvailable sensors:");
-        for (Sensor sensor : sensorManager.getSensorList(type)) {
+        final List<Sensor> sensorList = sensorManager.getSensorList(type);
+        final StringBuilder sensorListBuilder = new StringBuilder();
+        if (sensorList.isEmpty()) {
+            sensorListBuilder.append(getString(R.string.sensor_not_available));
+        } else {
+            sensorListBuilder.append(getString(R.string.available_sensors)).append(":");
+        }
+        for (Sensor sensor : sensorList) {
             sensorListBuilder.append("\n - ");
             sensorListBuilder.append(sensor.getName());
             if (shouldPrintType) {
@@ -64,6 +74,6 @@ public class GenericSensorFragment extends Fragment {
 
         sensorsList.setText(sensorListBuilder.toString());
 
-        return mainLayout;
+        return mainView;
     }
 }

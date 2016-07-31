@@ -15,38 +15,42 @@ import com.formichelli.dfsensors.fragments.FragmentsManager;
 
 public class DFSensors extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private final FragmentsManager fragmentsManager = new FragmentsManager();
 
-    private final FragmentsManager _fragmentsManager = new FragmentsManager();
-
-    private DrawerLayout _drawer;
-    private FragmentManager _fragmentManager;
+    private DrawerLayout drawer;
+    private Toolbar toolbar;
+    private FragmentManager fragmentManager;
     private Fragment currentFragment = null;
+    private String defaultTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dfsensors);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        _drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, _drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        _drawer.setDrawerListener(toggle);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        _fragmentManager = getFragmentManager();
+        fragmentManager = getFragmentManager();
 
+        Utils.setContext(this);
+
+        defaultTitle = getString(R.string.app_name);
         showFragment(R.id.nav_main_page);
     }
 
     @Override
     public void onBackPressed() {
-        if (_drawer.isDrawerOpen(GravityCompat.START)) {
-            _drawer.closeDrawer(GravityCompat.START);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -55,20 +59,23 @@ public class DFSensors extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         boolean success = showFragment(item.getItemId());
-
-        _drawer.closeDrawer(GravityCompat.START);
-
+        drawer.closeDrawer(GravityCompat.START);
         return success;
     }
 
     private boolean showFragment(int itemId) {
-        final Fragment targetFragment = _fragmentsManager.getFragment(itemId);
+        int sensorType = Utils.getSensorTypeFromItemId(itemId);
+        final Fragment targetFragment = fragmentsManager.getFragment(sensorType);
+
         if (targetFragment == null || targetFragment == currentFragment) {
             return false;
         }
 
+        final String title = Utils.getSensorDescription(sensorType);
+        toolbar.setTitle(title.isEmpty() ? defaultTitle : title);
+
         currentFragment = targetFragment;
-        _fragmentManager.beginTransaction().replace(R.id.content_frame, targetFragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, targetFragment).commit();
 
         return true;
     }
