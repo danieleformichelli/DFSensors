@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_main_page"
+            android:title="@string/main_page" />
+        <item
+            android:id="@+id/nav_accelerometer"
+            android:title="@string/accelerometer" />
+        <item
+            android:id="@+id/nav_ambient_temperature"
+            android:title="@string/ambient_temperature" />
+        <item
+            android:id="@+id/nav_gravity"
+            android:title="@string/gravity" />
+        <item
+            android:id="@+id/nav_gyroscope"
+            android:title="@string/gyroscope" />
+        <item
+            android:id="@+id/nav_light"
+            android:title="@string/light" />
+        <item
+            android:id="@+id/nav_linear_acceleration"
+            android:title="@string/linear_acceleration" />
+        <item
+            android:id="@+id/nav_magnetic_field"
+            android:title="@string/magnetic_field" />
+        <item
+            android:id="@+id/nav_orientation"
+            android:title="@string/orientation" />
+        <item
+            android:id="@+id/nav_pressure"
+            android:title="@string/pressure" />
+        <item
+            android:id="@+id/nav_proximity"
+            android:title="@string/proximity" />
+        <item
+            android:id="@+id/nav_relative_humidity"
+            android:title="@string/relative_humidity" />
+        <item
+            android:id="@+id/nav_rotation_vector"
+            android:title="@string/rotation_vector" />
+        <item
+            android:id="@+id/nav_temperature"
+            android:title="@string/temperature" />
+    </group>
+</menu>
