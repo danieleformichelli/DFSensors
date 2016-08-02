@@ -31,8 +31,11 @@ public class FragmentsManager {
             case Sensor.TYPE_ALL:
                 return SensorListFragment.newInstance(sensorType);
 
+            case Sensor.TYPE_ACCELEROMETER:
+                return AccelerometerDetailsFragment.newInstance();
+
             default:
-                return SensorDetailsFragment.newInstance(sensorType);
+                return SensorDetailsFragmentOneValue.newInstance(sensorType);
         }
     }
 }

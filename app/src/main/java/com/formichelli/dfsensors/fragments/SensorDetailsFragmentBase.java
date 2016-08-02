@@ -5,8 +5,11 @@ import android.app.Fragment;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +20,17 @@ import com.formichelli.dfsensors.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SensorDetailsFragment#newInstance} factory method to
+ * Use the {@link SensorDetailsFragmentBase#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SensorDetailsFragment extends Fragment {
-    private static final String TYPE = "type";
+public abstract class SensorDetailsFragmentBase extends Fragment implements SensorEventListener {
+    private static final String TYPE = "TYPE";
 
     private int type;
+    private SensorManager sensorManager;
+    private Sensor sensor;
 
-    public SensorDetailsFragment() {
+    public SensorDetailsFragmentBase() {
         // Required empty public constructor
     }
 
@@ -34,14 +39,13 @@ public class SensorDetailsFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param type The type of the sensor
-     * @return A new instance of fragment SensorDetailsFragment.
+     * @return A new instance of fragment SensorDetailsFragmentBase.
      */
-    public static SensorDetailsFragment newInstance(int type) {
-        SensorDetailsFragment fragment = new SensorDetailsFragment();
+    public static <T extends Fragment> T newInstance(T base, int type) {
         Bundle args = new Bundle();
         args.putInt(TYPE, type);
-        fragment.setArguments(args);
-        return fragment;
+        base.setArguments(args);
+        return base;
     }
 
     @Override
@@ -60,39 +64,41 @@ public class SensorDetailsFragment extends Fragment {
 
         setDetails(mainView);
 
+        addValueView(mainView);
+
         return mainView;
     }
 
     private void setDetails(GridLayout mainView) {
-        SensorManager sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-        Sensor defaultSensor = sensorManager.getDefaultSensor(type);
-        if (defaultSensor == null) {
+        sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+        sensor = sensorManager.getDefaultSensor(type);
+        if (sensor == null) {
             mainView.addView(label(getString(R.string.sensor_not_available)));
             return;
         }
 
         // name
         mainView.addView(label(getString(R.string.sensor_name_label)));
-        mainView.addView(value(defaultSensor.getName()));
+        mainView.addView(label(sensor.getName()));
 
         // resolution
         mainView.addView(label(getString(R.string.sensor_resolution_label)));
-        mainView.addView(value(String.valueOf(defaultSensor.getResolution())));
+        mainView.addView(value(String.valueOf(sensor.getResolution())));
 
         // max value
         mainView.addView(label(getString(R.string.sensor_max_range)));
-        mainView.addView(value(String.valueOf(defaultSensor.getMaximumRange())));
+        mainView.addView(value(String.valueOf(sensor.getMaximumRange())));
 
         // vendor
         mainView.addView(label(getString(R.string.sensor_vendor_label)));
-        mainView.addView(value(defaultSensor.getVendor()));
+        mainView.addView(value(sensor.getVendor()));
 
         // version
         mainView.addView(label(getString(R.string.sensor_version_label)));
-        mainView.addView(value(String.valueOf(defaultSensor.getVersion())));
+        mainView.addView(value(String.valueOf(sensor.getVersion())));
     }
 
-    private View label(String label) {
+    TextView label(CharSequence label) {
         TextView labelView = new TextView(getContext());
         labelView.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         labelView.setPadding(0, 0, 0, 10);
@@ -100,10 +106,34 @@ public class SensorDetailsFragment extends Fragment {
         return labelView;
     }
 
-    private View value(String value) {
+    TextView value(CharSequence value) {
         TextView valueView = new TextView(getContext());
         valueView.setPadding(30, 0, 0, 10);
         valueView.setText(value);
         return valueView;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        sensorChanged(sensorEvent);
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+        accuracyChanged(sensor, i);
+    }
+
+    protected abstract void addValueView(GridLayout mainView);
+
+    protected abstract void sensorChanged(SensorEvent sensorEvent);
+
+    protected abstract void accuracyChanged(Sensor sensor, int i);
+
 }

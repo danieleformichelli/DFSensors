@@ -27,4 +27,8 @@
     <string name="sensor_version_label">Version</string>
     <string name="sensor_not_available">Sensor not available</string>
     <string name="available_sensors">Available sensors</string>
+    <string name="sensor_value_label">Value</string>
+    <string name="sensor_value_x_label"><![CDATA[Value<sub><small>x</small></sub>]]></string>
+    <string name="sensor_value_y_label"><![CDATA[Value<sub><small>y</small></sub>]]></string>
+    <string name="sensor_value_z_label"><![CDATA[Value<sub><small>z</small></sub>]]></string>
 </resources>
