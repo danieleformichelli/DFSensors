@@ -17,6 +17,7 @@
     <string name="proximity">Proximity</string>
     <string name="relative_humidity">Relative Humidity</string>
     <string name="rotation_vector">Rotation Vector</string>
+    <string name="game_rotation_vector">Game Rotation Vector</string>
     <string name="temperature">Temperature</string>
     <string name="main_page">Main Page</string>
 
@@ -27,8 +28,16 @@
     <string name="sensor_version_label">Version</string>
     <string name="sensor_not_available">Sensor not available</string>
     <string name="available_sensors">Available sensors</string>
-    <string name="sensor_value_label">Value</string>
-    <string name="sensor_value_x_label"><![CDATA[Value<sub><small>x</small></sub>]]></string>
-    <string name="sensor_value_y_label"><![CDATA[Value<sub><small>y</small></sub>]]></string>
-    <string name="sensor_value_z_label"><![CDATA[Value<sub><small>z</small></sub>]]></string>
+    <string name="sensor_value_label">Value (%1$s)</string>
+    <string name="sensor_value_x_label"><![CDATA[Value<sub><small>x</small></sub> (%1$s)]]></string>
+    <string name="sensor_value_y_label"><![CDATA[Value<sub><small>y</small></sub> (%1$s)]]></string>
+    <string name="sensor_value_z_label"><![CDATA[Value<sub><small>z</small></sub> (%1$s)]]></string>
+    <string name="sensor_orientation_azimuth_label">Azimuth (%1$s)</string>
+    <string name="sensor_orientation_pitch_label">Pitch (%1$s)</string>
+    <string name="sensor_orientation_roll_label">Roll (%1$s)</string>
+    <string name="sensor_rotation_vector_value_0_label">x*sin(θ/2)</string>
+    <string name="sensor_rotation_vector_value_1_label">y*sin(θ/2)</string>
+    <string name="sensor_rotation_vector_value_2_label">z*sin(θ/2)</string>
+    <string name="sensor_rotation_vector_value_3_label">cos(θ/2)</string>
+    <string name="sensor_rotation_vector_value_4_label">Accuracy (%1$s)</string>
 </resources>

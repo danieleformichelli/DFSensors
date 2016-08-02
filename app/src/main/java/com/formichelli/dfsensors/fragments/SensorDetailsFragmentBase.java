@@ -9,7 +9,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +63,9 @@ public abstract class SensorDetailsFragmentBase extends Fragment implements Sens
 
         setDetails(mainView);
 
-        addValueView(mainView);
+        if (sensor != null) {
+            addValueView(mainView);
+        }
 
         return mainView;
     }
@@ -79,7 +80,7 @@ public abstract class SensorDetailsFragmentBase extends Fragment implements Sens
 
         // name
         mainView.addView(label(getString(R.string.sensor_name_label)));
-        mainView.addView(label(sensor.getName()));
+        mainView.addView(value(sensor.getName()));
 
         // resolution
         mainView.addView(label(getString(R.string.sensor_resolution_label)));
@@ -118,6 +119,12 @@ public abstract class SensorDetailsFragmentBase extends Fragment implements Sens
         super.onResume();
 
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
     }
 
     @Override

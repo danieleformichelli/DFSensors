@@ -9,6 +9,7 @@ import com.formichelli.dfsensors.R;
 
 public class SensorDetailsFragmentOneValue extends SensorDetailsFragmentBase {
     private TextView sensorValueView;
+    private String unitOfMeasure = "";
 
     /**
      * Use this factory method to create a new instance of
@@ -21,9 +22,14 @@ public class SensorDetailsFragmentOneValue extends SensorDetailsFragmentBase {
         return SensorDetailsFragmentBase.newInstance(new SensorDetailsFragmentOneValue(), type);
     }
 
+    public SensorDetailsFragmentOneValue setUnitOfMeasure(final String unitOfMeasure) {
+        this.unitOfMeasure = unitOfMeasure;
+        return this;
+    }
+
     protected void addValueView(GridLayout mainView) {
         // value
-        mainView.addView(label(getString(R.string.sensor_value_label)));
+        mainView.addView(label(getString(R.string.sensor_value_label, unitOfMeasure)));
         sensorValueView = value("");
         mainView.addView(sensorValueView);
     }
@@ -31,11 +37,7 @@ public class SensorDetailsFragmentOneValue extends SensorDetailsFragmentBase {
     @Override
     protected void sensorChanged(SensorEvent sensorEvent) {
 
-        sensorValueView.setText(readValue(sensorEvent.values));
-    }
-
-    protected String readValue(float[] values) {
-        return String.valueOf(values[0]);
+        sensorValueView.setText(String.valueOf(sensorEvent.values[0]));
     }
 
     @Override

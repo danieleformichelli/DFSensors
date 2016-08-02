@@ -101,6 +101,9 @@ public class Utils {
             case R.id.nav_rotation_vector:
                 return Sensor.TYPE_ROTATION_VECTOR;
 
+            case R.id.nav_game_rotation_vector:
+                return Sensor.TYPE_GAME_ROTATION_VECTOR;
+
             default:
                 return Utils.INVALID_SENSOR_TYPE;
         }

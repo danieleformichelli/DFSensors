@@ -40,5 +40,8 @@
         <item
             android:id="@+id/nav_rotation_vector"
             android:title="@string/rotation_vector" />
+        <item
+            android:id="@+id/nav_game_rotation_vector"
+            android:title="@string/game_rotation_vector" />
     </group>
 </menu>
