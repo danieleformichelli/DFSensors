@@ -5,6 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="loading">Loading…</string>
+    <string name="main_page">Sensors List</string>
     <string name="accelerometer">Accelerometer</string>
     <string name="ambient_temperature">Ambient Temperature</string>
     <string name="gravity">Gravity</string>

@@ -52,9 +52,6 @@ public class Utils {
             case Sensor.TYPE_ROTATION_VECTOR:
                 return context.getString(R.string.rotation_vector);
 
-            case Sensor.TYPE_TEMPERATURE:
-                return context.getString(R.string.temperature);
-
             default:
                 return String.valueOf(sensorType);
         }
