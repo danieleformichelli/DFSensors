@@ -20,7 +20,6 @@
     <string name="rotation_vector">Rotation Vector</string>
     <string name="game_rotation_vector">Game Rotation Vector</string>
     <string name="temperature">Temperature</string>
-    <string name="main_page">Main Page</string>
 
     <string name="sensor_name_label">Name</string>
     <string name="sensor_resolution_label">Resolution</string>
