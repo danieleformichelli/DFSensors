@@ -2,13 +2,12 @@ package com.formichelli.dfsensors.fragments;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
-import android.text.Html;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
 import com.formichelli.dfsensors.R;
 
-public class SensorDetailsFragmentRotatioinVector extends SensorDetailsFragmentBase {
+public class SensorDetailsFragmentRotationVector extends SensorDetailsFragmentBase {
     protected TextView sensorValue0View;
     protected TextView sensorValue1View;
     protected TextView sensorValue2View;
@@ -21,8 +20,8 @@ public class SensorDetailsFragmentRotatioinVector extends SensorDetailsFragmentB
      *
      * @return A new instance of fragment SensorDetailsFragmentBase.
      */
-    public static SensorDetailsFragmentRotatioinVector newInstance(int type) {
-        return SensorDetailsFragmentBase.newInstance(new SensorDetailsFragmentRotatioinVector(), type);
+    public static SensorDetailsFragmentRotationVector newInstance(int type) {
+        return SensorDetailsFragmentBase.newInstance(new SensorDetailsFragmentRotationVector(), type);
     }
 
     @Override
@@ -42,15 +41,17 @@ public class SensorDetailsFragmentRotatioinVector extends SensorDetailsFragmentB
         sensorValue2View = value("");
         mainView.addView(sensorValue2View);
 
-        // cos(θ/2)
-        mainView.addView(label(getString(R.string.sensor_rotation_vector_value_3_label)));
-        sensorValue3View = value("");
-        mainView.addView(sensorValue3View);
+        if (type != Sensor.TYPE_GAME_ROTATION_VECTOR) {
+            // cos(θ/2)
+            mainView.addView(label(getString(R.string.sensor_rotation_vector_value_3_label)));
+            sensorValue3View = value("");
+            mainView.addView(sensorValue3View);
 
-        // accuracy
-        mainView.addView(label(getString(R.string.sensor_rotation_vector_value_4_label, "rad")));
-        sensorValue4View = value("");
-        mainView.addView(sensorValue4View);
+            // accuracy
+            mainView.addView(label(getString(R.string.sensor_rotation_vector_value_4_label, "rad")));
+            sensorValue4View = value("");
+            mainView.addView(sensorValue4View);
+        }
     }
 
     @Override
@@ -58,8 +59,10 @@ public class SensorDetailsFragmentRotatioinVector extends SensorDetailsFragmentB
         sensorValue0View.setText(String.valueOf(sensorEvent.values[0]));
         sensorValue1View.setText(String.valueOf(sensorEvent.values[1]));
         sensorValue2View.setText(String.valueOf(sensorEvent.values[2]));
-        sensorValue3View.setText(String.valueOf(sensorEvent.values[3]));
-        sensorValue4View.setText(String.valueOf(sensorEvent.values[4]));
+        if (type != Sensor.TYPE_GAME_ROTATION_VECTOR) {
+            sensorValue3View.setText(String.valueOf(sensorEvent.values[3]));
+            sensorValue4View.setText(String.valueOf(sensorEvent.values[4]));
+        }
     }
 
     @Override

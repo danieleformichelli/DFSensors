@@ -65,10 +65,10 @@ public class FragmentsManager {
                 return SensorDetailsFragmentOneValue.newInstance(sensorType).setUnitOfMeasure(UnitsOfMeasure.HUMIDITY);
 
             case Sensor.TYPE_ROTATION_VECTOR:
-                return SensorDetailsFragmentRotatioinVector.newInstance(sensorType);
+                return SensorDetailsFragmentRotationVector.newInstance(sensorType);
 
             case Sensor.TYPE_GAME_ROTATION_VECTOR:
-                return SensorDetailsFragmentRotatioinVector.newInstance(sensorType);
+                return SensorDetailsFragmentRotationVector.newInstance(sensorType);
 
             default:
                 return SensorDetailsFragmentOneValue.newInstance(sensorType);

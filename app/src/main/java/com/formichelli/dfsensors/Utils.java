@@ -52,6 +52,9 @@ public class Utils {
             case Sensor.TYPE_ROTATION_VECTOR:
                 return context.getString(R.string.rotation_vector);
 
+            case Sensor.TYPE_GAME_ROTATION_VECTOR:
+                return context.getString(R.string.game_rotation_vector);
+
             default:
                 return String.valueOf(sensorType);
         }

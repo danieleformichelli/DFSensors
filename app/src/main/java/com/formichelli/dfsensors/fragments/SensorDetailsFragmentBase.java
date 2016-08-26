@@ -25,7 +25,7 @@ import com.formichelli.dfsensors.R;
 public abstract class SensorDetailsFragmentBase extends Fragment implements SensorEventListener {
     private static final String TYPE = "TYPE";
 
-    private int type;
+    protected int type;
     private SensorManager sensorManager;
     private Sensor sensor;
 
