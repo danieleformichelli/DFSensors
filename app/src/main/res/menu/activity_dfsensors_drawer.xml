@@ -3,45 +3,59 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_main_page"
-            android:title="@string/main_page" />
+            android:title="@string/main_page"
+            android:icon="@drawable/main" />
         <item
             android:id="@+id/nav_accelerometer"
-            android:title="@string/accelerometer" />
+            android:title="@string/accelerometer"
+            android:icon="@drawable/acceleration" />
         <item
             android:id="@+id/nav_ambient_temperature"
-            android:title="@string/ambient_temperature" />
+            android:title="@string/ambient_temperature"
+            android:icon="@drawable/temperature" />
         <item
             android:id="@+id/nav_gravity"
-            android:title="@string/gravity" />
+            android:title="@string/gravity"
+            android:icon="@drawable/gravity" />
         <item
             android:id="@+id/nav_gyroscope"
-            android:title="@string/gyroscope" />
+            android:title="@string/gyroscope"
+            android:icon="@drawable/rotation" />
         <item
             android:id="@+id/nav_light"
-            android:title="@string/light" />
+            android:title="@string/light"
+            android:icon="@drawable/light" />
         <item
             android:id="@+id/nav_linear_acceleration"
-            android:title="@string/linear_acceleration" />
+            android:title="@string/linear_acceleration"
+            android:icon="@drawable/acceleration" />
         <item
             android:id="@+id/nav_magnetic_field"
-            android:title="@string/magnetic_field" />
+            android:title="@string/magnetic_field"
+            android:icon="@drawable/magnet" />
         <item
             android:id="@+id/nav_orientation"
-            android:title="@string/orientation" />
+            android:title="@string/orientation"
+            android:icon="@drawable/compass" />
         <item
             android:id="@+id/nav_pressure"
-            android:title="@string/pressure" />
+            android:title="@string/pressure"
+            android:icon="@drawable/gravity" />
         <item
             android:id="@+id/nav_proximity"
-            android:title="@string/proximity" />
+            android:title="@string/proximity"
+            android:icon="@drawable/ruler" />
         <item
             android:id="@+id/nav_relative_humidity"
-            android:title="@string/relative_humidity" />
+            android:title="@string/relative_humidity"
+            android:icon="@drawable/humidity" />
         <item
             android:id="@+id/nav_rotation_vector"
-            android:title="@string/rotation_vector" />
+            android:title="@string/rotation_vector"
+            android:icon="@drawable/_3d_rotation" />
         <item
             android:id="@+id/nav_game_rotation_vector"
-            android:title="@string/game_rotation_vector" />
+            android:title="@string/game_rotation_vector"
+            android:icon="@drawable/_3d_rotation" />
     </group>
 </menu>
